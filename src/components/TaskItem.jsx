@@ -2,7 +2,7 @@
 // eslint-disable-next-line react/prop-types
 const TaskItem = ({task}) => {
     return(
-        <div>
+        <div>   
             <h1>{task.description}</h1>
         </div>
     )
