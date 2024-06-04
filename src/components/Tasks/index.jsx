@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { AddTask } from "../AddTask";
 import { api } from "../../services/axios";
 import "./style.scss";
 import TaskItem from "../TaskItem";
@@ -26,6 +27,7 @@ export const Tasks = () => {
 
       <div className="last-tasks">
         <h3>Últimas Tarefas</h3>
+        <AddTask />
         <div className="tasks-list">
           {tasks
             .filter((task) => task.isCompleted === false)
