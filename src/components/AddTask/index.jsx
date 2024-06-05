@@ -10,7 +10,8 @@ import { useAlert } from "react-alert";
 
 import "./styles.scss";
 
-export const AddTask = () => {
+// eslint-disable-next-line react/prop-types
+export const AddTask = ({ fetchTasks }) => {
   const [task, setTask] = useState("");
 
   const alert = useAlert();
@@ -21,26 +22,26 @@ export const AddTask = () => {
 
   const handleTaskAddition = async () => {
     try {
-        if (task.length === 0) {
-            return alert.error(
-                "A tarefa precisa de uma descrição para ser adicionada."
-            );
-        }
+      if (task.length === 0) {
+        return alert.error(
+          "A tarefa precisa de uma descrição para ser adicionada."
+        );
+      }
 
-        await axios.post("http://localhost:8000/tasks", {
-            description: task,
-            isCompleted: false,
-        });
+      await axios.post("http://localhost:8080/tasks", {
+        description: task,
+        isCompleted: false,
+      });
 
-        await fetchTasks();
+      await fetchTasks();
 
-        setTask("");
+      setTask("");
 
-        await alert.success("A tarefa foi adicionada com sucesso!");
+      await alert.success("A tarefa foi adicionada com sucesso!");
     } catch (error) {
-        alert.error("Algo deu errado.");
+      alert.error("Algo deu errado.");
     }
-};
+  };
 
   return (
     <div className="add-task-container">
