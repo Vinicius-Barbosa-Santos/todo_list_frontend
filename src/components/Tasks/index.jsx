@@ -2,18 +2,21 @@ import { useEffect, useState } from "react";
 import { AddTask } from "../AddTask";
 import { api } from "../../services/axios";
 import "./style.scss";
+import { useAlert } from "react-alert";
 import TaskItem from "../TaskItem";
 
 export const Tasks = () => {
   const [tasks, setTasks] = useState([]);
+
+  const alert = useAlert()
 
   const fetchGetTasks = async () => {
     try {
       const response = await api.get("/tasks");
       console.log(response.data);
       setTasks(response.data);
-    } catch (e) {
-      console.error(e);
+    } catch (_error) {
+      alert.error('Não foi possível recuperar as tarefas.')
     }
   };
 
