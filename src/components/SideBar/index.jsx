@@ -1,7 +1,7 @@
-import { CustomButton } from "./CustomButton";
+import { CustomButton } from "../CustomButton";
 
 import "./style.scss";
-import logo from "../assets/images/logo.png";
+import logo from "../../assets/images/logo.png";
 
 export const Sidebar = () => {
   return (
