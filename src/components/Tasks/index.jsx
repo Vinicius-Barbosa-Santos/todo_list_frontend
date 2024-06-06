@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { AddTask } from "../AddTask";
 import { api } from "../../services/axios";
 import "./style.scss";
@@ -10,19 +10,18 @@ export const Tasks = () => {
 
   const alert = useAlert();
 
-  const fetchGetTasks = async () => {
+  const fetchGetTasks = useCallback(async () => {
     try {
       const response = await api.get("/tasks");
-      console.log(response.data);
       setTasks(response.data);
     } catch (_error) {
       alert.error("Não foi possível recuperar as tarefas.");
     }
-  };
+  }, [alert]);
 
   useEffect(() => {
     fetchGetTasks();
-  }, []);
+  }, [fetchGetTasks]);
 
   const lastTasks = useMemo(() => {
     return tasks.filter((task) => task.isCompleted === false);
